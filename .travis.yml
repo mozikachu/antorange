@@ -1,0 +1,11 @@
+language: go
+go:
+  - 1.6
+  - tip
+install:
+  - go get github.com/mozikachu/antorange
+notifications:
+  email:
+    recipients: mozikachu@users.noreply.github.com
+    on_success: change
+    on_failure: always
