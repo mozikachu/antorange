@@ -13,7 +13,7 @@ var (
 )
 
 func init() {
-	flag.StringVar(&addr, "l", ":1234", "addr to listen")
+	flag.StringVar(&addr, "l", ":8081", "addr to listen")
 	flag.IntVar(&bufferSize, "b", 2*(1024<<10), "<bufferSize> per range")
 	flag.IntVar(&thread, "t", 3, "concurrent range")
 	flag.IntVar(&retryTimes, "r", 3, "retry times")
