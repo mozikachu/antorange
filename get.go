@@ -306,7 +306,7 @@ func doTheFirstRange(rawBegin int64, req *http.Request, conn net.Conn, connState
 	fetchReq, fetchLength, err := func() (fetchReq *http.Request, fetchLength int64, err error) {
 		header := fmt.Sprintf("%d-%d", rawBegin, rawBegin+int64(bufferSize-1))
 
-		fetchReq, err = http.NewRequest("GET", req.URL.String(), nil)
+		fetchReq, err = http.NewRequest(http.MethodGet, req.URL.String(), nil)
 		if err != nil {
 			return
 		}
@@ -364,7 +364,7 @@ func getFetchArgs(i, t int, rawBegin, contentLength int64, req *http.Request) (f
 	if i != t-1 {
 		header := fmt.Sprintf("%d-%d", rawBegin+int64(bufferSize*i), rawBegin+int64(bufferSize*i+(bufferSize-1)))
 
-		fetchReq, err = http.NewRequest("GET", req.URL.String(), nil)
+		fetchReq, err = http.NewRequest(http.MethodGet, req.URL.String(), nil)
 		if err != nil {
 			return
 		}
@@ -373,7 +373,7 @@ func getFetchArgs(i, t int, rawBegin, contentLength int64, req *http.Request) (f
 	} else {
 		header := fmt.Sprintf("%d-", rawBegin+int64(bufferSize*i))
 
-		fetchReq, err = http.NewRequest("GET", req.URL.String(), nil)
+		fetchReq, err = http.NewRequest(http.MethodGet, req.URL.String(), nil)
 		if err != nil {
 			return
 		}
