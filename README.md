@@ -6,7 +6,7 @@ A http proxy which will implement multi-process transport but respond sequential
 
 [![Travis Build Status](https://travis-ci.org/mozikachu/antorange.svg?branch=master)](https://travis-ci.org/mozikachu/antorange)
 
-### Get Started
+### Getting Started
 
 1. `go get github.com/mozikachu/antorange` or download the binary file from [releases](https://github.com/mozikachu/antorange/releases)
 2. Execute `antorange`, it will listen on port 1234 as default.
