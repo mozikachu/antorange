@@ -32,7 +32,7 @@ func main() {
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
-			glog.Infoln(err)
+			glog.Errorln(err)
 			continue
 		}
 		go handleConn(conn)

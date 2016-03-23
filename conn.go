@@ -15,7 +15,7 @@ func handleConn(conn net.Conn) {
 
 	req, err := http.ReadRequest(bufio.NewReader(conn))
 	if err != nil {
-		glog.Infoln(err)
+		glog.Errorln(err)
 		return
 	}
 
@@ -24,12 +24,12 @@ func handleConn(conn net.Conn) {
 		b := []byte("HTTP/1.1 200 Connection established\r\n" + "Proxy-Agent: antorange" + "\r\n\r\n") // todo
 		c, err := dialTimeoutTimes("tcp", req.Host, time.Second*30, retryTimes)
 		if err != nil {
-			glog.Infoln(err)
+			glog.Errorln(err)
 			return
 		}
 		defer c.Close()
 		if _, err := conn.Write(b); err != nil {
-			glog.Infoln(err)
+			glog.Errorln(err)
 			return
 		}
 		Transport(conn, c)
@@ -41,13 +41,13 @@ func handleConn(conn net.Conn) {
 
 		c, err := dialTimeoutTimes("tcp", req.Host, time.Second*30, retryTimes)
 		if err != nil {
-			glog.Infoln(err)
+			glog.Errorln(err)
 			return
 		}
 		defer c.Close()
 
 		if err = req.Write(c); err != nil {
-			glog.Infoln(err)
+			glog.Errorln(err)
 			return
 		}
 		Transport(conn, c)

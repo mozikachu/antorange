@@ -22,7 +22,7 @@ func handleGet(conn net.Conn, req *http.Request) {
 
 	resp, err := getResponseTimes(req)
 	if err != nil {
-		glog.Infoln(err)
+		glog.Errorln(err)
 		return
 	}
 	resp.Body.Close()
@@ -38,13 +38,13 @@ func handleGet(conn net.Conn, req *http.Request) {
 func handleNormalGet(conn net.Conn, req *http.Request) {
 	c, err := dialTimeoutTimes("tcp", req.Host, time.Second*30, retryTimes)
 	if err != nil {
-		glog.Infoln(err)
+		glog.Errorln(err)
 		return
 	}
 	defer c.Close()
 
 	if err = req.Write(c); err != nil {
-		glog.Infoln(err)
+		glog.Errorln(err)
 		return
 	}
 	Transport(conn, c)
@@ -54,7 +54,7 @@ func handleRangeGet(conn net.Conn, req *http.Request, resp *http.Response, conte
 
 	dump, err := httputil.DumpResponse(resp, false)
 	if err != nil {
-		glog.Infoln(err)
+		glog.Errorln(err)
 		return
 	}
 	conn.Write(dump)
@@ -85,7 +85,7 @@ func handleRangeGet(conn net.Conn, req *http.Request, resp *http.Response, conte
 		_, err := conn.Write(ret[i])
 		if err != nil {
 			atomic.StoreUint32(&connState, 0)
-			glog.Infoln(err)
+			glog.Errorln(err)
 			return
 		}
 		ret[i] = nil
@@ -292,12 +292,12 @@ func doRangeQueue(ret [][]byte, req *http.Request, contentLength int64, t int, c
 	}()
 
 	if err := doTheFirstRange(rawBegin, req, conn, connStatePtr, cond); err != nil {
-		glog.Infoln(err)
+		glog.Errorln(err)
 		return
 	}
 
 	if err := doTheRestRange(rawBegin, req, connStatePtr, cond, ret, t, contentLength); err != nil {
-		glog.Infoln(err)
+		glog.Errorln(err)
 		return
 	}
 }
