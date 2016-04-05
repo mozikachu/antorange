@@ -1,4 +1,4 @@
-A http proxy which will implement multi-process transport but respond sequentially
+A http proxy which will implement multi-thread transport but respond sequentially
 
 多线程且按先后顺序获取数据，能够在提高获取速度的同时防止下载大文件断流，适合在线观看视频（或“边下边放”）
 
@@ -30,8 +30,8 @@ Usage of antorange:
 ### TODO
 
 
-- [ ] HTTPS multi-process transport support
-- [ ] Upload multi-process transport support
+- [ ] HTTPS multi-thread transport support
+- [ ] Upload multi-thread transport support
 
 ### Snapshot
 
